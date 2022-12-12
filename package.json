@@ -1,0 +1,22 @@
+{
+  "name": "eleventy-plugin-activity-pub",
+  "version": "0.0.1",
+  "description": "Eleventy plugin for generating ActivityPub actor files",
+  "main": "eleventy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LewisDaleUK/eleventy-activity-pub-plugin.git"
+  },
+  "author": "Lewis Dale <lewis@ihd.software>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LewisDaleUK/eleventy-activity-pub-plugin/issues"
+  },
+  "homepage": "https://github.com/LewisDaleUK/eleventy-activity-pub-plugin#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.0-canary.18"
+  }
+}
