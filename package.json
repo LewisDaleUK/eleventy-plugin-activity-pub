@@ -2,7 +2,7 @@
   "name": "eleventy-plugin-activity-pub",
   "version": "0.0.1",
   "description": "Eleventy plugin for generating ActivityPub actor files",
-  "main": "eleventy.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

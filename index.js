@@ -5,12 +5,13 @@ const fs = require('fs');
  * @param { domain: string, username: string, displayName?: string, summary?: string, } config 
  * @returns 
  */
-module.exports = ({
+module.exports = (eleventyConfig, {
 	domain,
 	username,
 	displayName = username,
 	summary
-}) => eleventyConfig => {
+}) => {
+	console.log(eleventyConfig);
 	eleventyConfig.on('eleventy.after', ({ dir }) => {
 		const actorDef = {
 			"@context": [
@@ -18,7 +19,7 @@ module.exports = ({
 				"https://w3id.org/security/v1"
 			],
 		
-			id: `https://${domain}/${actor}`,
+			id: `https://${domain}/${username}`,
 			type: "Person",
 			preferredUsername: username,
 			name: displayName,
@@ -32,7 +33,8 @@ module.exports = ({
 			],
 			summary,
 		}
-		fs.writeFileSync(`${dir.output}/${actor}.json`, JSON.stringify(actorDef));
+		fs.writeFileSync(`${dir.output}/${username}`, JSON.stringify(actorDef));
+		fs.writeFileSync(`${dir.output}/${username}.json`, JSON.stringify(actorDef));
 	});
 
 	eleventyConfig.on('eleventy.after', ({ dir }) => {
@@ -41,12 +43,12 @@ module.exports = ({
 		}
 
 		const wf = {
-			subject: `acct:${actor}@${domain}`,
+			subject: `acct:${username}@${domain}`,
 			links: [
 				{
 					rel: "self",
 					type: "application/activity+json",
-					href: `https://${domain}/${actor}`
+					href: `https://${domain}/${username}`
 				},
 				{
 					rel: "http://webfinger.net/rel/profile-page",
@@ -57,4 +59,6 @@ module.exports = ({
 		};
 		fs.writeFileSync(`${dir.output}/.well-known/webfinger`, JSON.stringify(wf));
 	});
+
+	return eleventyConfig;
 };
