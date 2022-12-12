@@ -11,7 +11,6 @@ module.exports = (eleventyConfig, {
 	displayName = username,
 	summary
 }) => {
-	console.log(eleventyConfig);
 	eleventyConfig.on('eleventy.after', ({ dir }) => {
 		const actorDef = {
 			"@context": [
