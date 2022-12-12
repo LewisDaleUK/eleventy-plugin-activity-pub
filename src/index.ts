@@ -1,16 +1,19 @@
-const fs = require('fs');
+import * as fs from 'node:fs';
+import { EleventyConfig } from '@11ty/eleventy';
 
-/**
- * 
- * @param { domain: string, username: string, displayName?: string, summary?: string, } config 
- * @returns 
- */
-module.exports = (eleventyConfig, {
+type ActivityPubPluginArgs = {
+	domain: string,
+	username: string,
+	displayName?: string,
+	summary?: string,
+};
+
+export = (eleventyConfig: EleventyConfig, {
 	domain,
 	username,
 	displayName = username,
 	summary
-}) => {
+}: ActivityPubPluginArgs) => {
 	eleventyConfig.on('eleventy.after', ({ dir }) => {
 		const actorDef = {
 			"@context": [
@@ -58,6 +61,4 @@ module.exports = (eleventyConfig, {
 		};
 		fs.writeFileSync(`${dir.output}/.well-known/webfinger`, JSON.stringify(wf));
 	});
-
-	return eleventyConfig;
-};
+}

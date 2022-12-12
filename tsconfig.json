@@ -1,0 +1,9 @@
+{
+	"include": ["src"],
+	"compilerOptions": {
+	  "outDir": "lib",
+	  "strict": true,
+	  "declaration": true,
+	  "typeRoots": ["./src/types", "./node_modules/@types"],
+	},
+  }

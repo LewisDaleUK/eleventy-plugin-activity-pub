@@ -1,9 +1,13 @@
 {
   "name": "eleventy-plugin-activity-pub",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Eleventy plugin for generating ActivityPub actor files",
-  "main": "index.js",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": ["./src/**/*"],
   "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +21,8 @@
   },
   "homepage": "https://github.com/LewisDaleUK/eleventy-plugin-activity-pub#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.0-canary.18"
+    "@11ty/eleventy": "^2.0.0-canary.18",
+    "@types/node": "^18.11.13",
+    "typescript": "^4.9.4"
   }
 }
