@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LewisDaleUK/eleventy-activity-pub-plugin.git"
+    "url": "git+https://github.com/LewisDaleUK/eleventy-plugin-activity-pub.git"
   },
   "author": "Lewis Dale <lewis@ihd.software>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/LewisDaleUK/eleventy-activity-pub-plugin/issues"
+    "url": "https://github.com/LewisDaleUK/eleventy-plugin-activity-pub/issues"
   },
-  "homepage": "https://github.com/LewisDaleUK/eleventy-activity-pub-plugin#readme",
+  "homepage": "https://github.com/LewisDaleUK/eleventy-plugin-activity-pub#readme",
   "devDependencies": {
     "@11ty/eleventy": "^2.0.0-canary.18"
   }
