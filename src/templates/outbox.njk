@@ -1,0 +1,6 @@
+---
+eleventyExcludeFromCollections: true
+permalink: /outbox
+---
+{% set data = collections[activitypuboutboxcollection] %}
+{{ data | activitypuboutboxroot | activitypubjson | safe }}
