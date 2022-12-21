@@ -5,7 +5,7 @@ Generate a simple, discoverable ActivityPub user for your Eleventy-powered websi
 ## Usage
 
 ```javascript
-const activityPubPlugin = require('eleventy-plugin-activity-pub').default;
+const activityPubPlugin = require('eleventy-plugin-activity-pub');
 
 module.exports = function(eleventyConfig) {
 	eleventyConfig.addPlugin(activityPubPlugin, {
