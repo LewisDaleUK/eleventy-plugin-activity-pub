@@ -4,7 +4,7 @@
   "description": "Eleventy plugin for generating ActivityPub actor files",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "files": ["./src/**/*", "./lib/**/*"],
+  "files": ["./lib/**/*"],
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
