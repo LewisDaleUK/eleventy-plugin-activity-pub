@@ -24,7 +24,7 @@ This will generate two files: a basic Actor file at `my-domain/user.json`, and a
 Optionally, you can generate an Outbox file by including `outbox: true`, and the key of the collection that should appear in the outbox:
 
 ```javascript
-const activityPubPlugin = require('eleventy-plugin-activity-pub').default;
+const activityPubPlugin = require('eleventy-plugin-activity-pub');
 
 module.exports = function(eleventyConfig) {
 	eleventyConfig.addPlugin(activityPubPlugin, {
