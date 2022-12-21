@@ -1,6 +1,6 @@
 {
   "name": "eleventy-plugin-activity-pub",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Eleventy plugin for generating ActivityPub actor files",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
