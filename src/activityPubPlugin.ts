@@ -14,6 +14,7 @@ export const activityPubPlugin = (eleventyConfig: EleventyConfig, {
 	avatar,
 }: ActivityPubPluginArgs) => {
 	eleventyConfig.on('eleventy.after', ({ dir }) => {
+		const url = `https://${domain}`;
 		const actorDef = {
 			"@context": [
 				"https://www.w3.org/ns/activitystreams",
@@ -25,6 +26,7 @@ export const activityPubPlugin = (eleventyConfig: EleventyConfig, {
 			preferredUsername: username,
 			name: displayName,
 			url: domain,
+			inbox: `${url}/inbox`,
 			attachments: [
 				{
 					"type": "PropertyValue",
