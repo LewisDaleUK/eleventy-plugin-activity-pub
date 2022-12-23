@@ -59,7 +59,7 @@ Add this to your `netlify.toml`, replacing `<username>` with the username you de
 [[headers]]
   for = "/.well-known/webfinger"
   [headers.values]
-	Content-Type = "application/jrd+json"
+    Content-Type = "application/jrd+json"
 ```
 
 ### Vercel
