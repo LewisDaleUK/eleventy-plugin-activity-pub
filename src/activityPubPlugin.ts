@@ -1,7 +1,6 @@
-import Eleventy, { EleventyConfig, CollectionItem } from "@11ty/eleventy";
+import { EleventyConfig, CollectionItem } from "@11ty/eleventy";
 import * as fs from "node:fs";
 import path = require("node:path");
-import { it } from "node:test";
 import { ActivityPubPluginArgs } from "./types";
 
 export const activityPubPlugin = (
