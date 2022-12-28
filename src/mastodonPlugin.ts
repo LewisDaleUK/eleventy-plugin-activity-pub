@@ -3,12 +3,12 @@ import { EleventyConfig } from "@11ty/eleventy";
 import { ActivityPubPluginArgs } from "./types";
 
 type MastodonPluginOptions = ActivityPubPluginArgs & {
-  accessToken: string;
+	accessToken: string;
 };
 
 export const mastodonPlugin = (
-  eleventyConfig: EleventyConfig,
-  options: MastodonPluginOptions
+	eleventyConfig: EleventyConfig,
+	options: MastodonPluginOptions
 ) => {
-  // not implemented yet
+	// not implemented yet
 };
