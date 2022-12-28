@@ -10,7 +10,7 @@ declare module "@11ty/eleventy" {
   ) => void;
   type Plugin = (
     fn: (config: EleventyConfig) => void,
-    options?: Object
+    options?: object
   ) => void;
 
   type CollectionApi = {
@@ -80,7 +80,7 @@ declare module "@11ty/eleventy" {
     namespace: (namespace: string, fn: Plugin) => void;
     addPlugin: Plugin;
     addGlobalData: (key: string, data: any) => void;
-    addPassthroughCopy: (file: string | Object) => void;
+    addPassthroughCopy: (file: string | object) => void;
     on: (
       event: "eleventy.before" | "eleventy.after" | "eleventy.beforeWatch",
       handler: (eventArgs: EventArgs) => void
