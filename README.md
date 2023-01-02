@@ -19,6 +19,20 @@ module.exports = function(eleventyConfig) {
 
 This will generate two files: a basic Actor file at `my-domain/user.json`, and a webfinger file at `my-domain/.well-known/webfinger`, both of which are can be used to discover your website as a user on the Fediverse - e.g. you can tag your blog in comments as `@{user}@{domain}`
 
+### Aliases
+
+In the exmaple above, to [_alias_ `@user@my-domain`](https://www.rfc-editor.org/rfc/rfc7033#section-4.4.2) to another user, add the `aliases` field:
+
+```js
+eleventyConfig.addPlugin(activityPubPlugin, {
+  // omited other fields
+  aliases: [
+    'https://dapchat.online/@lewisdaleuk',
+    'https://dapchat.online/users/@lewisdaleuk'
+  ]
+});
+```
+
 ### Generating an Outbox file
 
 Optionally, you can generate an Outbox file by including `outbox: true`, and the key of the collection that should appear in the outbox:
