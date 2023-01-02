@@ -38,14 +38,15 @@ export const activityPubPlugin = (
 				},
 			],
 			summary,
-			icon: avatar
-				? {
-						type: "Image",
-						mediaType: "image/jpeg", // TODO: Detect mediaType
-						url: avatar,
-				  }
-				: undefined,
 		};
+
+		if (avatar) {
+			actorDef.icon = {
+				type: "Image",
+				mediaType: "image/jpeg", // TODO: Detect mediaType
+				url: avatar,
+			};
+		}
 
 		if (outbox) {
 			actorDef.outbox = `${url}/outbox_1`;
