@@ -8,7 +8,8 @@
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,15 @@
   "devDependencies": {
     "@11ty/eleventy": "^2.0.0-canary.18",
     "@types/node": "^18.11.13",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
+    "eslint": "^8.30.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.1",
     "typescript": "^4.9.4"
+  },
+  "prettier": {
+    "useTabs": true
   }
 }

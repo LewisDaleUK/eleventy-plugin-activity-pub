@@ -1,3 +1,3 @@
-import { activityPubPlugin } from './activityPubPlugin';
+import { activityPubPlugin } from "./activityPubPlugin";
 
 export = activityPubPlugin;

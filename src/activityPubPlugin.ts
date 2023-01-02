@@ -1,26 +1,28 @@
-import Eleventy, { EleventyConfig, CollectionItem } from "@11ty/eleventy";
-import * as fs from 'node:fs';
+import { EleventyConfig, CollectionItem } from "@11ty/eleventy";
+import * as fs from "node:fs";
 import path = require("node:path");
-import { it } from "node:test";
 import { ActivityPubPluginArgs } from "./types";
 
-export const activityPubPlugin = (eleventyConfig: EleventyConfig, {
-	domain,
-	username,
-	displayName = username,
-	summary,
-	outbox,
-	outboxCollection,
-	avatar,
-}: ActivityPubPluginArgs) => {
-	eleventyConfig.on('eleventy.after', ({ dir }) => {
+export const activityPubPlugin = (
+	eleventyConfig: EleventyConfig,
+	{
+		domain,
+		username,
+		displayName = username,
+		summary,
+		outbox,
+		outboxCollection,
+		avatar,
+	}: ActivityPubPluginArgs
+) => {
+	eleventyConfig.on("eleventy.after", ({ dir }) => {
 		const url = `https://${domain}`;
 		const actorDef = {
 			"@context": [
 				"https://www.w3.org/ns/activitystreams",
-				"https://w3id.org/security/v1"
+				"https://w3id.org/security/v1",
 			],
-		
+
 			id: `https://${domain}/${username}`,
 			type: "Person",
 			preferredUsername: username,
@@ -29,10 +31,10 @@ export const activityPubPlugin = (eleventyConfig: EleventyConfig, {
 			inbox: `${url}/inbox`,
 			attachments: [
 				{
-					"type": "PropertyValue",
-					"name": "Website",
-					"value": `https://${domain}`
-				}
+					type: "PropertyValue",
+					name: "Website",
+					value: `https://${domain}`,
+				},
 			],
 			summary,
 			icon: avatar && {
@@ -40,12 +42,15 @@ export const activityPubPlugin = (eleventyConfig: EleventyConfig, {
 				mediaType: "image/jpeg", // TODO: Detect mediaType
 				url: avatar,
 			},
-		}
+		};
 		fs.writeFileSync(`${dir.output}/${username}`, JSON.stringify(actorDef));
-		fs.writeFileSync(`${dir.output}/${username}.json`, JSON.stringify(actorDef));
+		fs.writeFileSync(
+			`${dir.output}/${username}.json`,
+			JSON.stringify(actorDef)
+		);
 	});
 
-	eleventyConfig.on('eleventy.after', ({ dir }) => {
+	eleventyConfig.on("eleventy.after", ({ dir }) => {
 		if (!fs.existsSync(`${dir.output}/.well-known`)) {
 			fs.mkdirSync(`${dir.output}/.well-known`);
 		}
@@ -56,73 +61,80 @@ export const activityPubPlugin = (eleventyConfig: EleventyConfig, {
 				{
 					rel: "self",
 					type: "application/activity+json",
-					href: `https://${domain}/${username}`
+					href: `https://${domain}/${username}`,
 				},
 				{
 					rel: "http://webfinger.net/rel/profile-page",
 					type: "text/html",
-					href: `https://${domain}/blog`
-				}
-			]
+					href: `https://${domain}/blog`,
+				},
+			],
 		};
 		fs.writeFileSync(`${dir.output}/.well-known/webfinger`, JSON.stringify(wf));
 	});
 
-	eleventyConfig.addFilter("activitypubjson", obj => JSON.stringify(obj, null, 2));
-	eleventyConfig.addFilter("activitypubwrapoutbox", obj => ({
+	eleventyConfig.addFilter("activitypubjson", (obj) =>
+		JSON.stringify(obj, null, 2)
+	);
+	eleventyConfig.addFilter("activitypubwrapoutbox", (obj) => ({
 		"@context": ["https://www.w3.org/ns/activitystreams"],
 		type: "OrderedCollectionPage",
 		id: `https://${domain}/outbox`,
 		orderedItems: obj,
 	}));
 
-	eleventyConfig.addFilter('activitypuboutboxroot', items => ({
+	eleventyConfig.addFilter("activitypuboutboxroot", (items) => ({
 		"@context": "https://www.w3.org/ns/activitystreams",
-		"id": `https://${domain}/${username}/outbox`,
-		"type": "OrderedCollection",
-		"totalItems": items.length,
-		"first": `https://${domain}/outbox_page`,
-		"last": `https://${domain}/outbox_page`,
+		id: `https://${domain}/${username}/outbox`,
+		type: "OrderedCollection",
+		totalItems: items.length,
+		first: `https://${domain}/outbox_page`,
+		last: `https://${domain}/outbox_page`,
 	}));
 
-	eleventyConfig.addFilter('activitypuboutbox', (items: CollectionItem[]) => ({
+	eleventyConfig.addFilter("activitypuboutbox", (items: CollectionItem[]) => ({
 		"@context": "https://www.w3.org/ns/activitystreams",
 		type: "OrderedCollectionPage",
 		id: `https://${domain}/outbox_1`,
-		orderedItems: items.sort().map(item => ({
+		orderedItems: items.sort().map((item) => ({
 			actor: `https://${domain}/${username}`,
 			type: "Create",
 			published: item.date.toISOString(),
 			id: `https://${domain}${item.url}publish`,
-			to: [
-				"https://www.w3.org/ns/activitystreams#Public"
-			],
+			to: ["https://www.w3.org/ns/activitystreams#Public"],
 			object: {
 				attributedTo: `https://${domain}/${username}`,
 				content: `<p>${item.data.title}</p><p><a href="https://${domain}${item.url}">https://${domain}${item.url}</a></p>`,
 				id: `https://${domain}/${item.url}`,
 				inReplyTo: null,
 				published: item.date.toISOString(),
-				to: [
-					"https://www.w3.org/ns/activitystreams#Public"
-				],
+				to: ["https://www.w3.org/ns/activitystreams#Public"],
 				type: "Note",
-				url: `https://${domain}${item.url}`
+				url: `https://${domain}${item.url}`,
 			},
-		}))
+		})),
 	}));
 
-	if(outbox) {
-		eleventyConfig.addGlobalData("activitypuboutboxcollection", outboxCollection);
+	if (outbox) {
+		eleventyConfig.addGlobalData(
+			"activitypuboutboxcollection",
+			outboxCollection
+		);
 
-		eleventyConfig.on('eleventy.before', ({ dir }) => {
+		eleventyConfig.on("eleventy.before", ({ dir }) => {
 			fs.mkdirSync(`${dir.input}/outbox`);
-			fs.copyFileSync(`${__dirname}/../src/templates/outbox.njk`, path.resolve(`./${dir.input}/outbox/outbox.njk`));
-			fs.copyFileSync(`${__dirname}/../src/templates/outbox_page.njk`, `./${dir.input}/outbox/outbox_page.njk`);
+			fs.copyFileSync(
+				`${__dirname}/../src/templates/outbox.njk`,
+				path.resolve(`./${dir.input}/outbox/outbox.njk`)
+			);
+			fs.copyFileSync(
+				`${__dirname}/../src/templates/outbox_page.njk`,
+				`./${dir.input}/outbox/outbox_page.njk`
+			);
 		});
 
-		eleventyConfig.on('eleventy.after', ({ dir }) => {
+		eleventyConfig.on("eleventy.after", ({ dir }) => {
 			fs.rmSync(`${dir.input}/outbox`, { recursive: true, force: true });
 		});
 	}
-}
+};
