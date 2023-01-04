@@ -18,7 +18,8 @@ export const activityPubPlugin = (
 ) => {
 	eleventyConfig.on("eleventy.after", ({ dir }) => {
 		const url = `https://${domain}`;
-		const actorDef = {
+
+		const actorDef: ActorDef = {
 			"@context": [
 				"https://www.w3.org/ns/activitystreams",
 				"https://w3id.org/security/v1",
@@ -38,12 +39,20 @@ export const activityPubPlugin = (
 				},
 			],
 			summary,
-			icon: avatar && {
+		};
+
+		if (avatar) {
+			actorDef.icon = {
 				type: "Image",
 				mediaType: "image/jpeg", // TODO: Detect mediaType
 				url: avatar,
-			},
-		};
+			};
+		}
+
+		if (outbox) {
+			actorDef.outbox = `${url}/outbox_1`;
+		}
+
 		fs.writeFileSync(`${dir.output}/${username}`, JSON.stringify(actorDef));
 		fs.writeFileSync(
 			`${dir.output}/${username}.json`,
@@ -80,6 +89,7 @@ export const activityPubPlugin = (
 	eleventyConfig.addFilter("activitypubjson", (obj) =>
 		JSON.stringify(obj, null, 2)
 	);
+
 	eleventyConfig.addFilter("activitypubwrapoutbox", (obj) => ({
 		"@context": ["https://www.w3.org/ns/activitystreams"],
 		type: "OrderedCollectionPage",
@@ -141,6 +151,32 @@ export const activityPubPlugin = (
 			fs.rmSync(`${dir.input}/outbox`, { recursive: true, force: true });
 		});
 	}
+};
+
+type ActorDef = {
+	"@context": string[];
+	id: string;
+	type: string;
+	preferredUsername: string;
+	name: string;
+	url: string;
+	inbox: string;
+	outbox?: string;
+	attachments: ActorDefAttachment[];
+	summary?: string;
+	icon?: Icon;
+};
+
+type ActorDefAttachment = {
+	type: string;
+	name: string;
+	value: string;
+};
+
+type Icon = {
+	type: string;
+	url: string;
+	mediaType: string;
 };
 
 type WebFingerLink = {
