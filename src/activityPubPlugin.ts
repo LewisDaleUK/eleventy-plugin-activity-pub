@@ -3,6 +3,7 @@ import * as fs from "node:fs";
 import path = require("node:path");
 import { ActivityPubPluginArgs } from "./types";
 
+/** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export const activityPubPlugin = (
 	eleventyConfig: EleventyConfig,
 	{

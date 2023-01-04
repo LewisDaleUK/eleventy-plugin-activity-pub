@@ -4,7 +4,10 @@
   "description": "Eleventy plugin for generating ActivityPub actor files",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "files": ["./src/**/*", "./lib/**/*"],
+  "files": [
+    "./src/**/*",
+    "./lib/**/*"
+  ],
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
@@ -22,7 +25,7 @@
   },
   "homepage": "https://github.com/LewisDaleUK/eleventy-plugin-activity-pub#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.0-canary.18",
+    "@11ty/eleventy": "^2.0.0-canary.23",
     "@types/node": "^18.11.13",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
