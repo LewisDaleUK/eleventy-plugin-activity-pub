@@ -11,6 +11,7 @@ export const activityPubPlugin = (
 		displayName = username,
 		summary,
 		outbox,
+		aliases,
 		outboxCollection,
 		avatar,
 	}: ActivityPubPluginArgs
@@ -64,7 +65,7 @@ export const activityPubPlugin = (
 			fs.mkdirSync(`${dir.output}/.well-known`);
 		}
 
-		const wf = {
+		const wf: Webfinger = {
 			subject: `acct:${username}@${domain}`,
 			links: [
 				{
@@ -79,6 +80,9 @@ export const activityPubPlugin = (
 				},
 			],
 		};
+		if (aliases) {
+			wf.aliases = aliases;
+		}
 		fs.writeFileSync(`${dir.output}/.well-known/webfinger`, JSON.stringify(wf));
 	});
 
@@ -173,4 +177,16 @@ type Icon = {
 	type: string;
 	url: string;
 	mediaType: string;
+};
+
+type WebFingerLink = {
+	rel: string;
+	type: string;
+	href: string;
+};
+
+type Webfinger = {
+	subject: string;
+	links?: WebFingerLink[];
+	aliases?: string[];
 };

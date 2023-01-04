@@ -6,4 +6,5 @@ export type ActivityPubPluginArgs = {
 	outbox?: boolean;
 	outboxCollection?: string;
 	avatar?: string;
+	aliases?: string[];
 };
