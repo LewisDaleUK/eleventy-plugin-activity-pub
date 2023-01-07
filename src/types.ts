@@ -1,3 +1,8 @@
+export type Alias = {
+	username: string;
+	domain: string;
+};
+
 export type ActivityPubPluginArgs = {
 	domain: string;
 	username: string;
@@ -6,5 +11,5 @@ export type ActivityPubPluginArgs = {
 	outbox?: boolean;
 	outboxCollection?: string;
 	avatar?: string;
-	aliases?: string[];
+	alias?: Alias;
 };

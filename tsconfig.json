@@ -5,6 +5,7 @@
 		"strict": true,
 		"declaration": true,
 		"typeRoots": ["./src/types", "./node_modules/@types"],
-		"noImplicitAny": false
+		"noImplicitAny": false,
+		"esModuleInterop": true
 	},
   }

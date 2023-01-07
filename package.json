@@ -1,6 +1,6 @@
 {
   "name": "eleventy-plugin-activity-pub",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Eleventy plugin for generating ActivityPub actor files",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -32,10 +32,9 @@
     "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.1",
     "typescript": "^4.9.4"
   },
-  "prettier": {
-    "useTabs": true
+  "dependencies": {
+    "node-fetch": "^2.6.7"
   }
 }

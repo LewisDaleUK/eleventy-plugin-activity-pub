@@ -10,9 +10,8 @@ module.exports = {
   parserOptions: {
     ecmaVersion: "latest",
   },
-  plugins: ["@typescript-eslint", "prettier"],
+  plugins: ["@typescript-eslint"],
   rules: {
-    "prettier/prettier": "error",
     "@typescript-eslint/no-unused-vars": "error",
   },
 };
