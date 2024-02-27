@@ -60,7 +60,7 @@ export const activityPubPlugin = (
 			}
 
 			if (outbox) {
-				actorDef.outbox = `${url}/outbox_1`;
+				actorDef.outbox = `${url}/outbox`;
 			}
 
 			fs.writeFileSync(`${dir.output}/${username}`, JSON.stringify(actorDef));
@@ -138,7 +138,7 @@ export const activityPubPlugin = (
 	eleventyConfig.addFilter("activitypuboutbox", (items: CollectionItem[]) => ({
 		"@context": "https://www.w3.org/ns/activitystreams",
 		type: "OrderedCollectionPage",
-		id: `https://${domain}/outbox_1`,
+		id: `https://${domain}/outbox`,
 		orderedItems: items.sort().map((item) => ({
 			actor: `https://${domain}/${username}`,
 			type: "Create",
